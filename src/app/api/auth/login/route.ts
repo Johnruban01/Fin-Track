@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+
 
 const prisma = new PrismaClient();
 
@@ -29,6 +31,18 @@ export async function POST(request: Request) {
     if(!passWordMatch) {
       return new Response("Invalid password", { status: 403 });
     }
+
+
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        name: user.name,
+        email: user.email
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: "7d" }
+    );
+  
     // ✅ Login successful – return safe user data only
     return NextResponse.json({
       success: true,
@@ -37,7 +51,7 @@ export async function POST(request: Request) {
         email: user.email,
         name: user.name,
       },
-      token: "dummy-token", // or real JWT later
+      token, // or real JWT later
     });
 
   } catch (error) {
