@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../core/axios";
 import { getUserId } from "../../../lib/getUserId";
-import { getUser } from "../../../lib/getUser";
 
 interface Transaction {
   id: number;

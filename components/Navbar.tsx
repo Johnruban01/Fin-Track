@@ -78,7 +78,7 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-gray-600 flex items-center justify-center">
               <FiUser className="w-4 h-4 text-blue-600 dark:text-gray-300" />
             </div>
-            <span className="hidden lg:inline-block font-medium text-sm">John Doe</span>
+            <span className="hidden lg:inline-block font-medium text-sm">John</span>
           </div>
         </div>
       </nav>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiHome, FiDollarSign, FiSettings, FiPieChart, FiUser } from "react-icons/fi";
+import { getUser } from "../lib/getUser";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
@@ -71,7 +72,7 @@ export default function DashboardSidebar() {
             <FiUser className="w-5 h-5 text-gray-600 dark:text-gray-300" />
           </div>
           <div>
-            <p className="font-medium">John Doe</p>
+            <p className="font-medium">John</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">Admin</p>
           </div>
         </div>

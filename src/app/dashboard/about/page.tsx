@@ -12,9 +12,9 @@ export default function page() {
         </p>
 
         <p>
-            Built with ❤️ using modern web technologies like React, Next.js, Tailwind CSS, Prisma, and Razorpay.
+            Built with ❤️ using modern web technologies like React, Next.js, Tailwind CSS and Prisma.
         </p>
-
+        
         <p>
             Created by John A Ruban, with the goal of learning full-stack development and solving a real-life problem.
         </p>
