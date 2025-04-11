@@ -24,16 +24,6 @@ export default function DashboardSidebar() {
       href: "/analytics",
       icon: <FiPieChart className="w-5 h-5" />,
     },
-    {
-      name: "Profile",
-      href: "/profile",
-      icon: <FiUser className="w-5 h-5" />,
-    },
-    {
-      name: "Settings",
-      href: "/settings",
-      icon: <FiSettings className="w-5 h-5" />,
-    },
   ];
 
   return (
@@ -60,7 +50,7 @@ export default function DashboardSidebar() {
               }`}
             >
               <span className="mr-3">{item.icon}</span>
-              <span className="font-medium">{item.name}</span>
+              <span className="font-large">{item.name}</span>
             </Link>
           ))}
         </div>
