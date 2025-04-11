@@ -27,7 +27,8 @@ export async function POST(request: Request) {
       return new Response("Invalid password", { status: 402 });
     }
     
-    const passWordMatch: boolean = await (user.password === password);
+    const passWordMatch = await bcrypt.compare(password, user.password);
+
     if(!passWordMatch) {
       return new Response("Invalid password", { status: 403 });
     }

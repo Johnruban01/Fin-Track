@@ -18,6 +18,7 @@ export default function Login() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const data = { email, password };
+    console.log("Data",data)
 
     try {
       const response = await api.post("/auth/login", data);

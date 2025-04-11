@@ -59,16 +59,7 @@ export default function Navbar() {
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center space-x-4">
-          <div className="relative hidden md:block">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="pl-10 pr-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-            />
-          </div>
-          
+        <div className="flex items-center space-x-4">    
           <button className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 relative">
             <FiBell className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>

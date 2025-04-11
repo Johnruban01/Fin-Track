@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import Navbar from '../../components/Navbar';
 import Providers from '../../components/Providers';
+import { AuthProvider } from '../../context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen w-full`}>
-      <Providers>
+      <AuthProvider>
           <main>{children}</main>
-      </Providers>
+      </AuthProvider>
       </body>
     </html>
   );
