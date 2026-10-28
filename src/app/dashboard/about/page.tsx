@@ -7,7 +7,7 @@ export default function page() {
 
         <p>
             FinTrack is a simple and elegant personal finance app that helps you keep track of your spending,
-            income, and savings — all in one place. Whether you're managing bills, salaries, or investments,
+            income, and savings — all in one place. Whether you are managing bills, salaries, or investments,
             FinTrack is designed to be your all-in-one tracker.
         </p>
 

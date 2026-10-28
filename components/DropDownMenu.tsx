@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
 
 interface DropdownMenuProps {
   trigger: React.ReactNode;

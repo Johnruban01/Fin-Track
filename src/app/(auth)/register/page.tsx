@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import api from "../../../../core/axios";
 
 export default function Login() {
@@ -8,30 +8,6 @@ export default function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const router = useRouter();  
-
-    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     const formData = new FormData(e.currentTarget);
-    //     const email = formData.get("email") as string;
-    //     const password = formData.get("password") as string;
-    //     const name = formData.get("name") as string;
-    //     const data = { email, password,name };
-    //     try {
-    //         const response = await api.post("/auth/register", data, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //         });
-    //         if (response.status === 200) {
-    //             redirect("/login");
-    //         }
-    //     }
-    //     catch(error) {
-    //         console.error(" Resgistartion failed:", error);
-    //         alert("Resgistartion  failed. Please check your credentials.");
-    //     }
-
-    // }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

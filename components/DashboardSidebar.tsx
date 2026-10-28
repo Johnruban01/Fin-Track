@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiHome, FiDollarSign, FiSettings, FiPieChart, FiUser } from "react-icons/fi";
-import { getUser } from "../lib/getUser";
+import { FiHome, FiDollarSign, FiPieChart, FiUser } from "react-icons/fi";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();

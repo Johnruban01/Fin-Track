@@ -1,13 +1,13 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { FiHome, FiInfo, FiMail, FiUser, FiBell, FiSearch, FiSettings, FiLogOut } from "react-icons/fi";
+import { FiHome, FiInfo, FiMail, FiUser, FiBell, FiLogOut } from "react-icons/fi";
 import { usePathname, useRouter } from "next/navigation";
 import { DropdownMenu } from "./DropDownMenu";
 
 export default function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
-  const [hasNotifications, setHasNotifications] = useState(false); // Add this line
+  const [hasNotifications] = useState(false); // Add this line
   const pathname = usePathname();
 
   useEffect(() => {
