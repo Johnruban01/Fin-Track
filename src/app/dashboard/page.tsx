@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../core/axios";
 import { getUserId } from "../../../lib/getUserId";
+import ProtectedRoute from "../../../context/ProtectedRoute";
 
 interface Transaction {
   id: number;
@@ -62,6 +63,7 @@ export default function DashboardPage() {
   };
 
   return (
+    //<ProtectedRoute>
     <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       {/* Main content */}
       <main className="container mx-auto px-4 py-8">

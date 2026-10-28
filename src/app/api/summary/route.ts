@@ -1,39 +1,58 @@
-import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
+import { prisma } from "../../../../lib/prisma";
+import { getUserId } from "../../../../lib/auth";
 
-const prisma = new PrismaClient();
+export async function GET(request: Request) {
+  const userId = getUserId(request);
+  if (!userId) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-export async function GET(request: Request){
-    const { searchParams} = new URL(request.url);
+  const month = new URL(request.url).searchParams.get("month"); // "YYYY-MM"
+  const now = new Date();
+  let year = now.getUTCFullYear();
+  let m = now.getUTCMonth();
 
-    const userId = searchParams.get("userId");
-    const month = searchParams.get("month");
-    
-    if(!userId || !month){
-        return new Response("Missing userId or month", {status: 400});
+  if (month) {
+    const match = /^(\d{4})-(\d{2})$/.exec(month);
+    if (!match || +match[2] < 1 || +match[2] > 12) {
+      return NextResponse.json({ message: "month must be YYYY-MM" }, { status: 400 });
+    }
+    year = +match[1];
+    m = +match[2] - 1;
+  }
+
+  const from = new Date(Date.UTC(year, m, 1));
+  const to = new Date(Date.UTC(year, m + 1, 1));
+
+  try {
+    const grouped = await prisma.transaction.groupBy({
+      by: ["type", "category"],
+      where: { userId, date: { gte: from, lt: to } },
+      _sum: { amount: true },
+    });
+
+    let income = 0;
+    let expenses = 0;
+    const byCategory: Record<string, number> = {};
+
+    for (const g of grouped) {
+      const sum = g._sum.amount ?? 0;
+      if (g.type === "INCOME") {
+        income += sum;
+      } else {
+        expenses += sum;
+        byCategory[g.category] = (byCategory[g.category] ?? 0) + sum;
+      }
     }
 
-    try{
-        const transactions = await prisma.transaction.findMany({
-            where:{
-                userId: userId,
-                date: {
-                    gte: new Date(month),
-                    lt: new Date(new Date(month).setMonth(new Date(month).getMonth() + 1))
-                }
-            }
-        })
-
-        const incomeTransactions = transactions.filter(tx => tx.type === "INCOME");
-        const expenseTransactions = transactions.filter(tx => tx.type === "EXPENSE");
-
-        const income = incomeTransactions.reduce((sum, tx) => sum + tx.amount, 0);
-        const expenses = expenseTransactions.reduce((sum, tx) => sum + tx.amount, 0);
-
-        const balance = income - expenses;
-        
-    }
-    catch(error){
-        console.error("Error fetching transactions:", error);
-        return new Response("Internal server error", {status: 500});
-    }
+    return NextResponse.json({
+      month: `${year}-${String(m + 1).padStart(2, "0")}`,
+      income,
+      expenses,
+      balance: income - expenses,
+      byCategory,
+    });
+  } catch (error) {
+    console.error("Summary error:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+  }
 }

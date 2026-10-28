@@ -21,7 +21,7 @@ import { toast } from "react-hot-toast";
 //import { useRouter } from "next/router";
 
 interface Transaction {
-  id: number;
+  id: string;
   title: string;
   amount: number;
   type: "INCOME" | "EXPENSE";

@@ -7,33 +7,53 @@ export default function Login() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
+    const router = useRouter();  
+
+    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     const formData = new FormData(e.currentTarget);
+    //     const email = formData.get("email") as string;
+    //     const password = formData.get("password") as string;
+    //     const name = formData.get("name") as string;
+    //     const data = { email, password,name };
+    //     try {
+    //         const response = await api.post("/auth/register", data, {
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //         });
+    //         if (response.status === 200) {
+    //             redirect("/login");
+    //         }
+    //     }
+    //     catch(error) {
+    //         console.error(" Resgistartion failed:", error);
+    //         alert("Resgistartion  failed. Please check your credentials.");
+    //     }
+
+    // }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const email = formData.get("email") as string;
-        const password = formData.get("password") as string;
-        const name = formData.get("name") as string;
-        const data = { email, password,name };
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
-        try {
-            const response = await api.post("/auth/register", data, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            if (response.status === 200) {
-                const { token } = response.data;
-                localStorage.setItem("token", token);
-                redirect("/login");
-            }
-        }
-        catch(error) {
-            console.error(" Resgistartion failed:", error);
-            alert("Resgistartion  failed. Please check your credentials.");
-        }
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+      name: formData.get("name") as string,
+    };
 
+    try {
+      await api.post("/auth/register", data);
+      router.push("/login");                   // no status check needed
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
+  };
 
     return (
         <div className="w-full">

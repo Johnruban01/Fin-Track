@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../../../core/axios";
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
+//import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,7 @@ export default function Login() {
       const response = await api.post("/auth/login", data);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
+        console.log("Token",response.data.token)
         router.push("/dashboard");
       }
     } catch (error: any) {

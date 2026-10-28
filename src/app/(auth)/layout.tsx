@@ -1,84 +1,99 @@
-import { Inter } from 'next/font/google';
-import type { Metadata } from 'next';
-
-const inter = Inter({ subsets: ['latin'] });
+import type { Metadata } from "next";
+import { FiTrendingUp, FiPieChart, FiShield } from "react-icons/fi";
 
 export const metadata: Metadata = {
-  title: 'Login - FinTrack',
-  description: 'Sign in to your FinTrack account',
+  title: "FinTrack",
+  description: "Track your income and expenses",
 };
 
-export default function LoginLayout({ children }: { children: React.ReactNode }) {
+const features = [
+  { icon: FiPieChart, text: "See spending broken down by category" },
+  { icon: FiTrendingUp, text: "Monthly income vs. expenses at a glance" },
+  { icon: FiShield, text: "Your data stays private to your account" },
+];
+
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full dark">
-      <body className={`${inter.className} h-full bg-gray-50 dark:bg-gray-900`}>
-        <div className="flex flex-col lg:flex-row h-screen w-full">
-          {/* Left Side - Form Section */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-6 bg-white dark:bg-gray-800">
-            <div className="w-full max-w-md space-y-8 px-4 sm:px-0">
-              <div className="text-center">
-                <div className="flex justify-center">
-                  <div className="bg-blue-600 text-white p-3 rounded-lg">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-8 w-8"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <h1 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
-                  Welcome to FinTrack
-                </h1>
-                <p className="mt-2 text-gray-500 dark:text-gray-400">
-                  Financial clarity at your fingertips
-                </p>
+    <div className="flex min-h-screen w-full">
+      {/* Form side */}
+      <div className="flex w-full flex-col justify-center bg-white px-6 py-12 dark:bg-gray-900 lg:w-1/2 lg:px-16">
+        <div className="mx-auto w-full max-w-md">
+          <div className="mb-10 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/30">
+              <FiTrendingUp className="h-5 w-5" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              FinTrack
+            </span>
+          </div>
+          {children}
+        </div>
+      </div>
+
+      {/* Brand side */}
+      <div className="relative hidden w-1/2 items-center justify-center overflow-hidden bg-slate-950 lg:flex">
+        <div className="absolute -left-24 -top-24 h-96 w-96 rounded-full bg-blue-600/30 blur-3xl" />
+        <div className="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-600/30 blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        <div className="relative z-10 w-full max-w-md px-8">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-slate-400">Total balance</p>
+              <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs font-medium text-emerald-400">
+                +12.4%
+              </span>
+            </div>
+            <p className="mt-2 text-4xl font-bold tracking-tight text-white">₹48,250</p>
+
+            <div className="mt-6 flex h-24 items-end gap-2">
+              {[35, 55, 40, 70, 50, 85, 60].map((h, i) => (
+                <div
+                  key={i}
+                  className="flex-1 rounded-md bg-gradient-to-t from-blue-600/40 to-blue-400"
+                  style={{ height: `${h}%` }}
+                />
+              ))}
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl bg-white/5 p-3">
+                <p className="text-xs text-slate-400">Income</p>
+                <p className="mt-1 text-lg font-semibold text-emerald-400">₹65,000</p>
               </div>
-              {children}
+              <div className="rounded-2xl bg-white/5 p-3">
+                <p className="text-xs text-slate-400">Expenses</p>
+                <p className="mt-1 text-lg font-semibold text-rose-400">₹16,750</p>
+              </div>
             </div>
           </div>
 
-          {/* Right Side - Visual Section */}
-          <div className="hidden lg:block w-1/2 relative overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700">
-            <div className="absolute inset-0 flex items-center justify-center p-12">
-              <div className="max-w-lg space-y-8 text-center">
-                <div className="relative">
-                  <div className="absolute -inset-4">
-                    <div
-                      className="w-full h-full mx-auto rotate-180 opacity-30 blur-lg filter"
-                      style={{
-                        background:
-                          'linear-gradient(90deg, #4F46E5 0%, #7C3AED 50%, #A855F7 100%)',
-                      }}
-                    ></div>
-                  </div>
-                  <img
-                    src="/dashboard-preview.jpg"
-                    alt="FinTrack Dashboard Preview"
-                    className="relative rounded-xl shadow-2xl border-8 border-white/10"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <h2 className="text-3xl font-bold text-white">
-                    Your Financial Dashboard
-                  </h2>
-                  <p className="text-lg text-blue-100">
-                    Track, analyze, and optimize your finances in one place
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2 className="mt-10 text-3xl font-bold leading-tight text-white">
+            Know where every rupee goes.
+          </h2>
+          <p className="mt-3 text-slate-400">
+            Log income and spends in seconds, see them by category, and stay on top of your month.
+          </p>
+
+          <ul className="mt-6 space-y-3 text-sm text-slate-300">
+            {features.map(({ icon: Icon, text }) => (
+              <li key={text} className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-blue-300">
+                  <Icon className="h-4 w-4" />
+                </span>
+                {text}
+              </li>
+            ))}
+          </ul>
         </div>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }

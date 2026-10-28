@@ -1,10 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 
-export const getUserId = () => {
+export const getUserId = (): string | null => {
+  if (typeof window === "undefined") return null;
+  try {
     const token = localStorage.getItem("token");
-    if (token) {
-        const decoded: { userId: string } = jwtDecode(token);
-        return decoded.userId;
-    }
-    return null; // or handle the case when token is not present
+    return token ? jwtDecode<{ userId: string }>(token).userId : null;
+  } catch {
+    return null;
+  }
 }

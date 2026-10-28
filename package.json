@@ -12,7 +12,9 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.0.2",
-    "@prisma/client": "^6.5.0",
+    "@neon/config": "^1.9.5",
+    "@neon/env": "^1.6.6",
+    "@prisma/client": "^6.19.3",
     "@radix-ui/react-slot": "^1.2.0",
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
@@ -43,6 +45,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "prisma": "^6.19.3",
     "tailwindcss": "^4.1.3",
     "typescript": "^5"
   }

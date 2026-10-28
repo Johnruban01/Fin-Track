@@ -135,26 +135,13 @@ export default function Navbar() {
             <FiUser className="mr-2 w-4 h-4" />
             Profile
           </a>
-          <a
-            href="#"
-            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <FiSettings className="mr-2 w-4 h-4" />
-            Settings
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <FiMail className="mr-2 w-4 h-4" />
-            Messages
-          </a>
         </div>
         <div className="py-1 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={() => {
-              // Add your sign out logic here
-              console.log('Signing out...');
+              localStorage.setItem("token", '');
+              router.push('./login')
+              
             }}
             className="w-full text-left flex items-center px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700"
           >

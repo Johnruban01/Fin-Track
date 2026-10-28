@@ -1,9 +1,6 @@
 // app/layout.tsx
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { SessionProvider } from 'next-auth/react';
-import Navbar from '../../components/Navbar';
-import Providers from '../../components/Providers';
 import { AuthProvider } from '../../context/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
